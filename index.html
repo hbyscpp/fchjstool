@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="./buffer.js"></script>
+	<script src="./bitcore-lib-cash.js"></script>
+	<script src="./bitcore-lib-freecash.js"></script>
+	<script src="./bitcore-mnemonic.js"></script>
+	<script src="./bitcore-lib.js"></script>
+	<script src="./bchaddrjs-0.4.2.js"></script>
+	<script src="./bitcore-message.js"></script>
+	<script src="./all-api.js"></script>
+	<script src="./bip-schnorr.js"></script>
+	
+</head>
+
+<body>
+    <script type="text/javascript">
+	//1NsnkNPzi5iRirf8ycD2C76ctjWnYbpBDT
+	//1NsnkNPzi5iRirf8ycD2C76ctjWnYbpBDT
+    //var addrBch = addressConvert('bch','fch',"bitcoincash:qrhltg96p2alxunt97ude3atwdjvnmqtfyaww2z68x");
+	// 	//0100000002ba7b802d10429e5b952ad384965df9ca5f923054a0219cfb2d7df88b8c615901000000006b483045022100d24d054dde15be1d09c1700fd783e8f0af22e8408634cb6a25c913f4d93729cf0220278b34ad40bc7422185d8f09a329b86e221452b3d6c7b910a32de8287088933c412102316a38f51bcefdb37138d574a3770d051487874d6b41475f061e9bdd59232082ffffffff4c5ee81e2e3e28e1387c3b8e9820ced98ee8411dc5b0caf2553ea99157329701020000006a47304402206a1a840a030735d92cc533f09184b56e0bbe2f3286459b3fff4ee3823d40bf2b02206c01cdf0770d293fad029d9770ef4d151e05904721fa21642f9f545f8d466e8c4121032746ae4811a6e302222b64e11b3f22b27f35bfee49b8fadb71c62e309bacf2ccffffffff0340420f00000000001976a9147e517ce48da51f81edbe97df591f8567e9c1ee9388ac40548900000000001976a914c714ea12b551d2d820712db4d6f2a4b61a2c2bee88acd8c22d00000000001976a91437b027f06ce41b757e66a8e9c5e98ae93ab86cae88ac00000000
+
+	//var sig=createTranscationSig();
+	/**
+	var privatekeys=['KzpJU6T6dhBsgifeNE4VMZBbhVTmi2QiK3UtN8CtmFT7rnBQ4XAo','L5LZd6XB9ZrqrXHDzFBXpHd1mYsV7spXpVshVsPswtJKhTFGQdne'];
+	var txids=['0159618c8bf87d2dfb9c21a05430925fcaf95d9684d32a955b9e42102d807bba','0197325791a93e55f2cab0c51d41e88ed9ce20988e3b7c38e1283e2e1ee85e4c'];
+	var inputamounts=[0.1,0.03];
+	var indexs=[0,2];
+	var outputaddres=['1CWum3hgLznihxqPayM6Q3m4ifEAZnfiyb','1K9eXL4Vp6aMQzbSVUfNQYZDLKngTK85wQ'];
+	var outputamounts=[0.01,0.09];
+	var returnaddr='165TC5vtWp2yH2P6PC6dRGTZdVoYSPRFsB';
+	var fee=0.00001;
+	sig=createFchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee);
+	console.log(sig);
+     **/
+	 /**                                             b7e151628aed2a6abf7158809cf4f3c762e7160f38b4da56a784d9045190cfef
+	var p=BitcoreLibFreeCash.PrivateKey.fromString('B7E151628AED2A6ABF7158809CF4F3C762E7160F38B4DA56A784D9045190CFEF');
+	console.log(p.toString());
+	var privateKey1 = BipSchnorr.base.BI.fromHex('B7E151628AED2A6ABF7158809CF4F3C762E7160F38B4DA56A784D9045190CFEF');
+    var privateKey2 = BipSchnorr.base.BI.fromHex('C90FDAA22168C234C4C6628B80DC1CD129024E088A67CC74020BBEA63B14E5C7');
+    var message = BipSchnorr.base.BF.from('243F6A8885A308D313198A2E03707344A4093822299F31D0082EFA98EC4E6C89', 'hex');
+    var aggregatedSignature = BipSchnorr.muSig.nonInteractive([privateKey1, privateKey2], message);
+	console.log(aggregatedSignature);
+	// const schnorr = require('schnorr');
+    // const secp256k1 = require('./Secp256k1.js');
+     //const hash256 = require('bcrypto/lib/hash256');
+	// const key = secp256k1.privateKeyGenerate();
+     //const pub = secp256k1.publicKeyCreate(key, true);
+     //const msg = hash256.digest(Buffer.from('foo', 'ascii'));
+     //const sig = schnorr.sign(msg, key);
+	 //schnorr.verify(msg, sig, pub)
+**/
+ 
+/**
+    var privatekeys=['L1MSWEPoXn5JCLVVyWU1gtv28YLetJWLqtgZtCBeuCHqYgKsEfdV'];
+	var txids=['5255360ed7819ad3e04ab5b0a75e6c9afe6f571dadc8cfea46514c249ab48aee'];
+	var inputamounts=[50];
+	var indexs=[0];
+	var outputaddres=['FThuDAq5ZPw6M2YAqHsBAVd9vPXoUySE7i'];
+	var outputamounts=[49.99];
+	var returnaddr='';
+	var fee=0.00001;
+	sig=createFchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee);
+	console.log(sig);**/
+	/**
+	var msg=signMessage('btc','cPBn5A4ikZvBTQ8D7NnvHZYCAxzDZ5Z2TSGW2LkyPiLxqYaJPBW4','1234');
+	console.log(msg);
+	var signmsg=messageVerify('btc',"n1ZCYg9YXtB5XCZazLxSmPDa8iwJRZHhGx",'1234',msg);
+	console.log(signmsg);**/
+	
+	var code=new Mnemonic('select scout crash enforce riot rival spring whale hollow radar rule sentence');
+	var hdrootkey=code.toHDPrivateKey();
+	var derivedprivatekey=hdrootkey.deriveChild("m/0/1/2'");
+	console.log(derivedprivatekey.privateKey.toAddress().toString());
+	
+</script>
+	
+   
+</body>
+
+</html>
