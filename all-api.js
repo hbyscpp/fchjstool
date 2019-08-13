@@ -115,7 +115,7 @@ txfee  交易费
 
 
  */
-function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee) {
+function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
 		if (outputaddresses.length != outputamounts.length)
@@ -130,7 +130,6 @@ function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 		var publickey = privatekey.toPublicKey();
 		var addr = publickey.toAddress();
 		var script = BitcoreLibCash.Script.buildPublicKeyHashOut(addr);
-		//var utxo = BitcoreLibCash.UnspentOutput.fromObject(});
 		trans = trans.from({
 				"txId": txids[i],
 				"outputIndex": indexs[i],
@@ -144,7 +143,18 @@ function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 	for (var i = 0; i < outputlen; ++i) {
 		trans = trans.to(addressConvert('bch', outputaddresses[i]), outputamounts[i] * 100000000);
 	}
-	if(returnaddr!='')
+		if(typeof(msg) == 'string' && msg!='')
+	{
+		var msgScript=BitcoreLibCash.Script.buildDataOut(msg);
+		var msgOutput=BitcoreLibCash.Transaction.Output.fromObject(
+		{
+			 satoshis: 0,
+    script: msgScript
+		}
+		);
+		trans.addOutput(msgOutput);
+	}
+	if(typeof(returnaddr) == 'string' && returnaddr!='')
 	  trans = trans.change(addressConvert('bch', returnaddr)).fee(txfee * 100000000).sign(privatekeys);
     else
 	  trans=trans.sign(privatekeys);
@@ -153,7 +163,7 @@ function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 
 }
 
-function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee) {
+function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
 		if (outputaddresses.length != outputamounts.length)
@@ -168,7 +178,6 @@ function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 		var publickey = privatekey.toPublicKey();
 		var addr = publickey.toAddress();
 		var script = BitcoreLib.Script.buildPublicKeyHashOut(addr);
-		//var utxo = BitcoreLibCash.UnspentOutput.fromObject(});
 		trans = trans.from({
 				"txId": txids[i],
 				"outputIndex": indexs[i],
@@ -182,7 +191,19 @@ function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 	for (var i = 0; i < outputlen; ++i) {
 		trans = trans.to(outputaddresses[i], outputamounts[i] * 100000000);
 	}
-	if(returnaddr!='')
+	
+	if(typeof(msg) == 'string' && msg!='')
+	{
+		var msgScript=BitcoreLib.Script.buildDataOut(msg);
+		var msgOutput=BitcoreLib.Transaction.Output.fromObject(
+		{
+			 satoshis: 0,
+    script: msgScript
+		}
+		);
+		trans.addOutput(msgOutput);
+	}
+	if(typeof(returnaddr) == 'string' && returnaddr!='')
 	  trans = trans.change(addressConvert('btc', returnaddr)).fee(txfee * 100000000).sign(privatekeys);
     else
 	  trans=trans.sign(privatekeys);
@@ -191,13 +212,13 @@ function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 
 }
 
-function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee) {
+function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
 		if (outputaddresses.length != outputamounts.length)
 			throw "output length not same"
 
-			var inputlen = inputprivatekeys.length;
+	var inputlen = inputprivatekeys.length;
 	var trans = BitcoreLibFreeCash.Transaction();
 	var privatekeys = new Array();
 	for (var i = 0; i < inputlen; ++i) {
@@ -206,7 +227,6 @@ function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 		var publickey = privatekey.toPublicKey();
 		var addr = publickey.toAddress();
 		var script = BitcoreLibFreeCash.Script.buildPublicKeyHashOut(addr);
-		//var utxo = BitcoreLibCash.UnspentOutput.fromObject(});
 		trans = trans.from({
 				"txId": txids[i],
 				"outputIndex": indexs[i],
@@ -220,10 +240,20 @@ function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 	for (var i = 0; i < outputlen; ++i) {
 		trans = trans.to(addressConvert('fch', outputaddresses[i]), outputamounts[i] * 100000000);
 	}
-	if(returnaddr!='')
+	if(typeof(msg) == 'string' && msg!='')
+	{
+		var msgScript=BitcoreLibFreeCash.Script.buildDataOut(msg);
+		var msgOutput=BitcoreLibFreeCash.Transaction.Output.fromObject(
+		{
+			 satoshis: 0,
+             script: msgScript
+		}
+		);
+		trans.addOutput(msgOutput);
+	}
+	if(typeof(returnaddr) == 'string' && returnaddr!='')
 	  trans = trans.change(addressConvert('fch', returnaddr)).fee(txfee * 100000000).sign(privatekeys);
     else
 	  trans=trans.sign(privatekeys);
 	return trans.toString();
-
 }

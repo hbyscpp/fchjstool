@@ -55,28 +55,33 @@
 	 //schnorr.verify(msg, sig, pub)
 **/
  
-/**
-    var privatekeys=['L1MSWEPoXn5JCLVVyWU1gtv28YLetJWLqtgZtCBeuCHqYgKsEfdV'];
-	var txids=['5255360ed7819ad3e04ab5b0a75e6c9afe6f571dadc8cfea46514c249ab48aee'];
-	var inputamounts=[50];
-	var indexs=[0];
+
+    var privatekeys=['KzkCu7mWmHz3JemPwrncnWfdeu6sUSGo6zSbc7U1PWLV5Er2vjVm'];
+	var txids=['670730d33189b62151775abf0a68e28d8213fa3ac4d0cccdcd0f94e1d25a630e'];
+	var inputamounts=[10];
+	var indexs=[1];
 	var outputaddres=['FThuDAq5ZPw6M2YAqHsBAVd9vPXoUySE7i'];
-	var outputamounts=[49.99];
-	var returnaddr='';
+	var outputamounts=[9.99];
+	var returnaddr=null;
 	var fee=0.00001;
-	sig=createFchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee);
-	console.log(sig);**/
+	sig=createFchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee,'hello,world');
+	console.log(sig);
+	
 	/**
 	var msg=signMessage('btc','cPBn5A4ikZvBTQ8D7NnvHZYCAxzDZ5Z2TSGW2LkyPiLxqYaJPBW4','1234');
 	console.log(msg);
 	var signmsg=messageVerify('btc',"n1ZCYg9YXtB5XCZazLxSmPDa8iwJRZHhGx",'1234',msg);
 	console.log(signmsg);**/
-	
+	/**
 	var code=new Mnemonic('select scout crash enforce riot rival spring whale hollow radar rule sentence');
 	var hdrootkey=code.toHDPrivateKey();
 	var derivedprivatekey=hdrootkey.deriveChild("m/0/1/2'");
 	console.log(derivedprivatekey.privateKey.toAddress().toString());
-	
+	**/    
+	/**
+	var p=BitcoreLibFreeCash.PrivateKey.fromString('5HxWvvfubhXpYYpS3tJkw6fq9jE9j18THftkZjHHfmFiWtmAbrj');
+	console.log(p.toString());
+	console.log(p.toWIF());**/
 </script>
 	
    

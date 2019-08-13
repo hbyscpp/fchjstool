@@ -153,26 +153,39 @@ const three = BigInteger.valueOf(3);
 const four = BigInteger.valueOf(4);
 const seven = BigInteger.valueOf(7);
 
+function reverseBuffer(b){
+var buffer=Buffer.alloc(b.length);
+var len=b.length;
+for(var i=0;i<len;++i)
+{
+	buffer[len-i-1]=b[i];
+}
+return buffer;
+}
+
 function sign(privateKey, message) {
   // https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#signing
-  const k0 = math.deterministicGetK0(privateKey, message);
+  
+  const rmessage=reverseBuffer(message);
+  const k0 = math.deterministicGetK0(privateKey, rmessage);
   const R = G.multiply(k0);
   const k = math.getK(R, k0);
   const P = G.multiply(privateKey);
   const Rx = convert.intToBuffer(R.affineX);
-  const e = math.getE(Rx, P, message);
+  const e = math.getE(Rx, P, rmessage);
   return concat([Rx, convert.intToBuffer(k.add(e.multiply(privateKey)).mod(n))]);
 }
 
 function verify(pubKey, message, signature) {
-  check.checkVerifyParams(pubKey, message, signature);
+  const rmessage=reverseBuffer(message);
+  check.checkVerifyParams(pubKey, rmessage, signature);
 
   // https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#verification
   const P = convert.pubKeyToPoint(pubKey);
   const r = convert.bufferToInt(signature.slice(0, 32));
   const s = convert.bufferToInt(signature.slice(32, 64));
   check.checkSignatureInput(r, s);
-  const e = math.getE(convert.intToBuffer(r), P, message);
+  const e = math.getE(convert.intToBuffer(r), P, rmessage);
   const R = math.getR(s, e, P);
   if (R.curve.isInfinity(R) || math.jacobi(R.affineY) !== 1 || !R.affineX.equals(r)) {
     throw new Error('signature verification failed');
@@ -180,7 +193,8 @@ function verify(pubKey, message, signature) {
 }
 
 function batchVerify(pubKeys, messages, signatures) {
-  check.checkBatchVerifyParams(pubKeys, messages, signatures);
+  const rmessage=reverseBuffer(message);
+  check.checkBatchVerifyParams(pubKeys, rmessage, signatures);
 
   // https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#Batch_Verification
   let leftSide = zero;
@@ -190,7 +204,7 @@ function batchVerify(pubKeys, messages, signatures) {
     const r = convert.bufferToInt(signatures[i].slice(0, 32));
     const s = convert.bufferToInt(signatures[i].slice(32, 64));
     check.checkSignatureInput(r, s);
-    const e = math.getE(convert.intToBuffer(r), P, messages[i]);
+    const e = math.getE(convert.intToBuffer(r), P, rmessage[i]);
     const c = r.pow(three).add(seven).mod(p);
     const y = c.modPow(p.add(one).divide(four), p);
     if (c.compareTo(y.modPow(two, p)) !== 0) {
@@ -27315,13 +27329,14 @@ function nonInteractive(privateKeys, message) {
   if (!privateKeys || !privateKeys.length) {
     throw new Error('privateKeys must be an array with one or more elements');
   }
+  const rmessage=reverseBuffer(message);
 
   // https://blockstream.com/2018/01/23/musig-key-aggregation-schnorr-signatures/
   const rs = [];
   const Xs = [];
   let R = null;
   for (let privateKey of privateKeys) {
-    const ri = math.deterministicGetK0(privateKey, message);
+    const ri = math.deterministicGetK0(privateKey, rmessage);
     const Ri = G.multiply(ri);
     const Xi = G.multiply(privateKey);
     rs.push(ri);
