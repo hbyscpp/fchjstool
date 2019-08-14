@@ -15,24 +15,27 @@ function generateAdress(coinType, secretKey) {
 		var value = new buffer.Buffer(secretKey);
 		var hash = BitcoreLib.crypto.Hash.sha256(value);
 		var bn = BitcoreLib.crypto.BN.fromBuffer(hash);
-		var address = new BitcoreLib.PrivateKey(bn).toAddress().toString();
-		return address;
+		var privatekey=new BitcoreLib.PrivateKey(bn);
+		var address = privatekey.toAddress().toString();
+		return [privatekey.toString(),address];
 	}
 
 	if (coinType == 'bch') {
 		var value = new buffer.Buffer(secretKey);
 		var hash = BitcoreLibCash.crypto.Hash.sha256(value);
 		var bn = BitcoreLibCash.crypto.BN.fromBuffer(hash);
-		var address = new BitcoreLibCash.PrivateKey(bn).toAddress().toCashAddress();
-		return address
+		var privatekey = new BitcoreLibCash.PrivateKey(bn);
+		var address = privatekey.toAddress().toCashAddress();
+		return [privatekey.toString(),address];
 	}
 
 	if (coinType == 'fch') {
 		var value = new buffer.Buffer(secretKey);
 		var hash = BitcoreLibFreeCash.crypto.Hash.sha256(value);
 		var bn = BitcoreLibFreeCash.crypto.BN.fromBuffer(hash);
-		var address = new BitcoreLibFreeCash.PrivateKey(bn).toAddress().toCashAddress();
-		return address
+		var privatekey = new BitcoreLibFreeCash.PrivateKey(bn);
+		var address = privatekey.toAddress().toString();
+		return [privatekey.toString(),address];
 	}
 }
 

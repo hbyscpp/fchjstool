@@ -19,6 +19,9 @@
 
 <body>
     <script type="text/javascript">
+	
+	var r=generateAdress('fch','hello world');
+	console.log(r);
 	//1NsnkNPzi5iRirf8ycD2C76ctjWnYbpBDT
 	//1NsnkNPzi5iRirf8ycD2C76ctjWnYbpBDT
     //var addrBch = addressConvert('bch','fch',"bitcoincash:qrhltg96p2alxunt97ude3atwdjvnmqtfyaww2z68x");
@@ -55,7 +58,7 @@
 	 //schnorr.verify(msg, sig, pub)
 **/
  
-
+/**
     var privatekeys=['KzkCu7mWmHz3JemPwrncnWfdeu6sUSGo6zSbc7U1PWLV5Er2vjVm'];
 	var txids=['670730d33189b62151775abf0a68e28d8213fa3ac4d0cccdcd0f94e1d25a630e'];
 	var inputamounts=[10];
@@ -66,7 +69,7 @@
 	var fee=0.00001;
 	sig=createFchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee,'hello,world');
 	console.log(sig);
-	
+	**/
 	/**
 	var msg=signMessage('btc','cPBn5A4ikZvBTQ8D7NnvHZYCAxzDZ5Z2TSGW2LkyPiLxqYaJPBW4','1234');
 	console.log(msg);
