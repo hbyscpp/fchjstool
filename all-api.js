@@ -17,7 +17,7 @@ function generateAdress(coinType, secretKey) {
 		var bn = BitcoreLib.crypto.BN.fromBuffer(hash);
 		var privatekey=new BitcoreLib.PrivateKey(bn);
 		var address = privatekey.toAddress().toString();
-		return [privatekey.toString(),address];
+		return [privatekey.toWIF(),address];
 	}
 
 	if (coinType == 'bch') {
@@ -26,7 +26,7 @@ function generateAdress(coinType, secretKey) {
 		var bn = BitcoreLibCash.crypto.BN.fromBuffer(hash);
 		var privatekey = new BitcoreLibCash.PrivateKey(bn);
 		var address = privatekey.toAddress().toCashAddress();
-		return [privatekey.toString(),address];
+		return [privatekey.toWIF(),address];
 	}
 
 	if (coinType == 'fch') {
@@ -35,7 +35,7 @@ function generateAdress(coinType, secretKey) {
 		var bn = BitcoreLibFreeCash.crypto.BN.fromBuffer(hash);
 		var privatekey = new BitcoreLibFreeCash.PrivateKey(bn);
 		var address = privatekey.toAddress().toString();
-		return [privatekey.toString(),address];
+		return [privatekey.toWIF(),address];
 	}
 }
 
