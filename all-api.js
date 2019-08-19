@@ -260,3 +260,18 @@ function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 	  trans=trans.sign(privatekeys);
 	return trans.toString();
 }
+/**
+words 空格分隔  比如:你 好 世 界	
+path  btc m/44/0/0/1/2'  m/44/0/145/1/2'
+**/
+function  mnemonicWord(cointype,words,path)
+{
+	var code=new Mnemonic(words);
+	var hdrootkey=code.toHDPrivateKey();
+	var derivedprivatekey=hdrootkey.deriveChild(path);
+	var privatekey=derivedprivatekey.privateKey;
+	var address = privatekey.toAddress().toString();
+	return [privatekey.toWIF(),addressConvert(cointype,address)];
+}
+
+

@@ -20,8 +20,8 @@
 <body>
     <script type="text/javascript">
 	
-	var r=generateAdress('fch','hello world');
-	console.log(r);
+	//var r=generateAdress('fch','hello world');
+	//console.log(r);
 	//1NsnkNPzi5iRirf8ycD2C76ctjWnYbpBDT
 	//1NsnkNPzi5iRirf8ycD2C76ctjWnYbpBDT
     //var addrBch = addressConvert('bch','fch',"bitcoincash:qrhltg96p2alxunt97ude3atwdjvnmqtfyaww2z68x");
@@ -75,12 +75,10 @@
 	console.log(msg);
 	var signmsg=messageVerify('btc',"n1ZCYg9YXtB5XCZazLxSmPDa8iwJRZHhGx",'1234',msg);
 	console.log(signmsg);**/
-	/**
-	var code=new Mnemonic('select scout crash enforce riot rival spring whale hollow radar rule sentence');
-	var hdrootkey=code.toHDPrivateKey();
-	var derivedprivatekey=hdrootkey.deriveChild("m/0/1/2'");
-	console.log(derivedprivatekey.privateKey.toAddress().toString());
-	**/    
+	
+	var code=mnemonicWord('bch','select scout crash enforce riot rival spring whale hollow radar rule sentence',"m/0/145/0/1/2'");
+	console.log(code);
+	 
 	/**
 	var p=BitcoreLibFreeCash.PrivateKey.fromString('5HxWvvfubhXpYYpS3tJkw6fq9jE9j18THftkZjHHfmFiWtmAbrj');
 	console.log(p.toString());
