@@ -8991,6 +8991,7 @@ var Format = {}
 Format.Legacy = 'legacy'
 Format.Bitpay = 'bitpay'
 Format.Cashaddr = 'cashaddr'
+Format.FreeCash='freecash'
 
 /**
  * @static
@@ -9459,7 +9460,8 @@ module.exports = {
   isTestnetAddress: isTestnetAddress,
   isP2PKHAddress: isP2PKHAddress,
   isP2SHAddress: isP2SHAddress,
-  InvalidAddressError: InvalidAddressError
+  InvalidAddressError: InvalidAddressError,
+  decodeAddress:decodeAddress
 }
 
 }).call(this,require("buffer").Buffer)

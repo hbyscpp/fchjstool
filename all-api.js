@@ -81,6 +81,17 @@ function addressConvert(toCoinType, address) {
 	}
 }
 
+function addressType(addr)
+{
+	try
+	{
+	var type=bchaddr.decodeAddress(addr);
+	return type.format;
+	}catch{
+	return 'none';
+	}
+	
+}
 function signMessage(coinType,privateKey,msg)
 {
 	var pk=BitcoreMsg.PrivateKey.fromString(privateKey);

@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="./buffer.js"></script>
 	<script src="./bitcore-lib-cash.js"></script>
+	<script src="./buffer.js"></script>
 	<script src="./bitcore-lib-freecash.js"></script>
 	<script src="./bitcore-mnemonic.js"></script>
 	<script src="./bitcore-lib.js"></script>
@@ -33,13 +33,16 @@
 	var txids=['0159618c8bf87d2dfb9c21a05430925fcaf95d9684d32a955b9e42102d807bba','0197325791a93e55f2cab0c51d41e88ed9ce20988e3b7c38e1283e2e1ee85e4c'];
 	var inputamounts=[0.1,0.03];
 	var indexs=[0,2];
-	var outputaddres=['1CWum3hgLznihxqPayM6Q3m4ifEAZnfiyb','1K9eXL4Vp6aMQzbSVUfNQYZDLKngTK85wQ'];
+	var outputaddres=['FThuDAq5ZPw6M2YAqHsBAVd9vPXoUySE7i','FThuDAq5ZPw6M2YAqHsBAVd9vPXoUySE7i'];
 	var outputamounts=[0.01,0.09];
 	var returnaddr='165TC5vtWp2yH2P6PC6dRGTZdVoYSPRFsB';
 	var fee=0.00001;
-	sig=createFchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee);
+	sig=createBchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee);
 	console.log(sig);
-     **/
+    **/
+	//var s="0200000002ba7b802d10429e5b952ad384965df9ca5f923054a0219cfb2d7df88b8c615901000000006441419010cce61638e65c1a662bb7c93aa67420e37c44d51fdc01e207d99929d93a18faa52cf989dd3de9c457b719e2e5e81b6cc6a86b254edc372501165fe003af412102316a38f51bcefdb37138d574a3770d051487874d6b41475f061e9bdd59232082ffffffff4c5ee81e2e3e28e1387c3b8e9820ced98ee8411dc5b0caf2553ea99157329701020000006441e6e412e9a57eb2eaca342dff5dd52d7c5045a658240d4ee943501404c126f71bf9830edfa6fbda8e0827243a6d8522f9acf06bab4a416e579beb1d1eaf8cd0104121032746ae4811a6e302222b64e11b3f22b27f35bfee49b8fadb71c62e309bacf2ccffffffff0340420f00000000001976a914eff5a0ba0abbf3726b2fb8dcc7ab7364c9ec0b4988ac40548900000000001976a914eff5a0ba0abbf3726b2fb8dcc7ab7364c9ec0b4988acd8c22d00000000001976a91437b027f06ce41b757e66a8e9c5e98ae93ab86cae88ac00000000";
+	//var ts=new BitcoreLib.Transaction(s);
+	//console.log(ts.toJSON());
 	 /**                                             b7e151628aed2a6abf7158809cf4f3c762e7160f38b4da56a784d9045190cfef
 	var p=BitcoreLibFreeCash.PrivateKey.fromString('B7E151628AED2A6ABF7158809CF4F3C762E7160F38B4DA56A784D9045190CFEF');
 	console.log(p.toString());
@@ -59,30 +62,36 @@
 **/
  
 /**
-    var privatekeys=['KzkCu7mWmHz3JemPwrncnWfdeu6sUSGo6zSbc7U1PWLV5Er2vjVm'];
-	var txids=['670730d33189b62151775abf0a68e28d8213fa3ac4d0cccdcd0f94e1d25a630e'];
-	var inputamounts=[10];
+    var privatekeys=['Ky7RV2ZNkXFBAD4K58kiC4kUEHf4a2fsdVJY2eXv7pogNUCVSCmA'];
+	var txids=['b117cf3b8e601d71e0bfc9c57b3d7bc05454b309ffb5fde042bd1e5260e5c35d'];
+	var inputamounts=[1];
 	var indexs=[1];
-	var outputaddres=['FThuDAq5ZPw6M2YAqHsBAVd9vPXoUySE7i'];
-	var outputamounts=[9.99];
+	var outputaddres=['bitcoincash:qr35zh62rhx3usvkzmlvhhjactfqtfxag5edc7zmv3'];
+	var outputamounts=[1];
 	var returnaddr=null;
 	var fee=0.00001;
-	sig=createFchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee,'hello,world');
+	sig=createBchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee,'hello,world');
 	console.log(sig);
 	**/
 	/**
 	var msg=signMessage('btc','cPBn5A4ikZvBTQ8D7NnvHZYCAxzDZ5Z2TSGW2LkyPiLxqYaJPBW4','1234');
 	console.log(msg);
 	var signmsg=messageVerify('btc',"n1ZCYg9YXtB5XCZazLxSmPDa8iwJRZHhGx",'1234',msg);
-	console.log(signmsg);**/
-	
-	var code=mnemonicWord('bch','select scout crash enforce riot rival spring whale hollow radar rule sentence',"m/0/145/0/1/2'");
-	console.log(code);
+	console.log(signmsg);
+	**/
+	//var code=mnemonicWord('bch','的 去 次 收 深 官 负 袁 训 伤 鼓 楼',"m/0'/145'/1'/1/2");
+	//ar code=mnemonicWord('bch','faculty matrix spoon adult enemy soon broccoli solution scissors speed negative cross',"m/0'/145'/1'/1/2");
+	//console.log(code);
 	 
 	/**
 	var p=BitcoreLibFreeCash.PrivateKey.fromString('5HxWvvfubhXpYYpS3tJkw6fq9jE9j18THftkZjHHfmFiWtmAbrj');
 	console.log(p.toString());
 	console.log(p.toWIF());**/
+	//var p=importAdressFromWIF('fch','Kz8imAGRhYEMcxjiVBudgRctgJBmhRo5zwnDqcE94keyu6DLJZNN');
+	//console.log(p);
+	
+	var at=addressType('FThuDAq5ZPw6M2YAqHsBAVd9vPXoUySE7i');
+	console.log(at);
 </script>
 	
    
