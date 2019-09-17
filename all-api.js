@@ -87,9 +87,9 @@ function addressType(addr)
 	{
 	var type=bchaddr.decodeAddress(addr);
 	return type.format;
-	}catch{
-	return 'none';
-	}
+	}catch (error) {
+    return 'none';
+  }
 	
 }
 function signMessage(coinType,privateKey,msg)

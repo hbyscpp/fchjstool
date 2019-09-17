@@ -89,9 +89,20 @@
 	console.log(p.toWIF());**/
 	//var p=importAdressFromWIF('fch','Kz8imAGRhYEMcxjiVBudgRctgJBmhRo5zwnDqcE94keyu6DLJZNN');
 	//console.log(p);
-	
+	/**
 	var at=addressType('FThuDAq5ZPw6M2YAqHsBAVd9vPXoUySE7i');
 	console.log(at);
+	var inputprivatekeys =new Array("KzhGyRo7jFNrCS4BnZRUrAiP9pLrsLWCYsCD13T3XHSY7R4xfsUs");
+	var txids =["b117cf3b8e601d71e0bfc9c57b3d7bc05454b309ffb5fde042bd1e5260e5c35d"];
+	var inputamounts =[1.0];
+	var indexs=[1];
+	var outputaddresses =new Array("bitcoincash:qpw2sn0yufl43u9vnk55mkhefuqzq3g3zvqfacspgr");
+	var outputamounts =[1.0];
+	var returnaddr ="";
+	var txfee =0;
+	var msg =""; 
+	var xx=createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg)
+    console.log(xx);**/
 </script>
 	
    
