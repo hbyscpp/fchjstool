@@ -14,6 +14,7 @@
 	<script src="./bitcore-message.js"></script>
 	<script src="./all-api.js"></script>
 	<script src="./bip-schnorr.js"></script>
+	<script src="./bignumber.js"></script>
 	
 </head>
 
@@ -61,18 +62,18 @@
 	 //schnorr.verify(msg, sig, pub)
 **/
  
-/**
-    var privatekeys=['Ky7RV2ZNkXFBAD4K58kiC4kUEHf4a2fsdVJY2eXv7pogNUCVSCmA'];
+
+    var privatekeys=['KxbCqqRA9SoMZjL3XzTQcKgid6tc35syQntfe2XDnU7jW5sYAvWY'];
 	var txids=['b117cf3b8e601d71e0bfc9c57b3d7bc05454b309ffb5fde042bd1e5260e5c35d'];
-	var inputamounts=[1];
-	var indexs=[1];
-	var outputaddres=['bitcoincash:qr35zh62rhx3usvkzmlvhhjactfqtfxag5edc7zmv3'];
-	var outputamounts=[1];
-	var returnaddr=null;
-	var fee=0.00001;
+	var inputamounts=['0.5'];
+	var indexs=[0];
+	var outputaddres=['bitcoincash:qqggc4n5rewesrdgjkjp6t9a5xtyp27seqjgh9ydg9','bitcoincash:qps03d5a045lfaa4ffrd6xtru6nh2gygygkvyjvsz3'];
+	var outputamounts=['0.000001','0.003'];
+	var returnaddr='bitcoincash:qqggc4n5rewesrdgjkjp6t9a5xtyp27seqjgh9ydg9';
+	var fee='0.000001';
 	sig=createBchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee,'hello,world');
 	console.log(sig);
-	**/
+	
 	/**
 	var msg=signMessage('btc','cPBn5A4ikZvBTQ8D7NnvHZYCAxzDZ5Z2TSGW2LkyPiLxqYaJPBW4','1234');
 	console.log(msg);
@@ -90,7 +91,7 @@
 	//var p=importAdressFromWIF('fch','Kz8imAGRhYEMcxjiVBudgRctgJBmhRo5zwnDqcE94keyu6DLJZNN');
 	//console.log(p);
 	/**
-	var at=addressType('FThuDAq5ZPw6M2YAqHsBAVd9vPXoUySE7i');
+	var at=addressType('F8XQPPbRyTwuQjMLvkLJgPxUuQhSt3MPRQ');
 	console.log(at);
 	var inputprivatekeys =new Array("KzhGyRo7jFNrCS4BnZRUrAiP9pLrsLWCYsCD13T3XHSY7R4xfsUs");
 	var txids =["b117cf3b8e601d71e0bfc9c57b3d7bc05454b309ffb5fde042bd1e5260e5c35d"];
@@ -102,7 +103,8 @@
 	var txfee =0;
 	var msg =""; 
 	var xx=createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg)
-    console.log(xx);**/
+    console.log(xx);
+	**/
 </script>
 	
    

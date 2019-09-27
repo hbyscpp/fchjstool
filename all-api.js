@@ -149,13 +149,13 @@ function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 				"outputIndex": indexs[i],
 				"address": addr.toString(),
 				"script": script.toHex(),
-				"satoshis": inputamounts[i] * 100000000
+				"satoshis": computerSatoshis(inputamounts[i])
 			});
 	}
 
 	var outputlen = outputaddresses.length;
 	for (var i = 0; i < outputlen; ++i) {
-		trans = trans.to(addressConvert('bch', outputaddresses[i]), outputamounts[i] * 100000000);
+		trans = trans.to(addressConvert('bch', outputaddresses[i]), computerSatoshis(outputamounts[i]));
 	}
 		if(typeof(msg) == 'string' && msg!='')
 	{
@@ -163,13 +163,13 @@ function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 		var msgOutput=BitcoreLibCash.Transaction.Output.fromObject(
 		{
 			 satoshis: 0,
-    script: msgScript
+             script: msgScript
 		}
 		);
 		trans.addOutput(msgOutput);
 	}
 	if(typeof(returnaddr) == 'string' && returnaddr!='')
-	  trans = trans.change(addressConvert('bch', returnaddr)).fee(txfee * 100000000).sign(privatekeys);
+	  trans = trans.change(addressConvert('bch', returnaddr)).fee(computerSatoshis(txfee)).sign(privatekeys);
     else
 	  trans=trans.sign(privatekeys);
 
@@ -177,6 +177,12 @@ function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 
 }
 
+function computerSatoshis(amount)
+{
+	var totalinputamount=new BigNumber(amount)
+	
+	return totalinputamount.times(100000000).toNumber();
+}
 function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
@@ -197,13 +203,13 @@ function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 				"outputIndex": indexs[i],
 				"address": addr.toString(),
 				"script": script.toHex(),
-				"satoshis": inputamounts[i] * 100000000
+				"satoshis": computerSatoshis(inputamounts[i])
 			});
 	}
 
 	var outputlen = outputaddresses.length;
 	for (var i = 0; i < outputlen; ++i) {
-		trans = trans.to(outputaddresses[i], outputamounts[i] * 100000000);
+		trans = trans.to(outputaddresses[i], computerSatoshis(outputamounts[i]));
 	}
 	
 	if(typeof(msg) == 'string' && msg!='')
@@ -212,13 +218,13 @@ function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 		var msgOutput=BitcoreLib.Transaction.Output.fromObject(
 		{
 			 satoshis: 0,
-    script: msgScript
+             script: msgScript
 		}
 		);
 		trans.addOutput(msgOutput);
 	}
 	if(typeof(returnaddr) == 'string' && returnaddr!='')
-	  trans = trans.change(addressConvert('btc', returnaddr)).fee(txfee * 100000000).sign(privatekeys);
+	  trans = trans.change(addressConvert('btc', returnaddr)).fee(computerSatoshis(txfee)).sign(privatekeys);
     else
 	  trans=trans.sign(privatekeys);
 
@@ -246,13 +252,13 @@ function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 				"outputIndex": indexs[i],
 				"address": addr.toString(),
 				"script": script.toHex(),
-				"satoshis": inputamounts[i] * 100000000
+				"satoshis": computerSatoshis(inputamounts[i])
 			});
 	}
 
 	var outputlen = outputaddresses.length;
 	for (var i = 0; i < outputlen; ++i) {
-		trans = trans.to(addressConvert('fch', outputaddresses[i]), outputamounts[i] * 100000000);
+		trans = trans.to(addressConvert('fch', outputaddresses[i]), computerSatoshis(outputamounts[i]));
 	}
 	if(typeof(msg) == 'string' && msg!='')
 	{
@@ -266,7 +272,7 @@ function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 		trans.addOutput(msgOutput);
 	}
 	if(typeof(returnaddr) == 'string' && returnaddr!='')
-	  trans = trans.change(addressConvert('fch', returnaddr)).fee(txfee * 100000000).sign(privatekeys);
+	  trans = trans.change(addressConvert('fch', returnaddr)).fee(computerSatoshis(txfee)).sign(privatekeys);
     else
 	  trans=trans.sign(privatekeys);
 	return trans.toString();
