@@ -101,9 +101,13 @@ function signMessage(coinType,privateKey,msg)
 
 function messageVerify(coinType,address,msg,sigstr)
 {
-	
+	try{
 	var addr=addressConvert('btc',address);
 	return BitcoreMsg.Message(msg).verify(addr,sigstr)
+	}catch(error)
+	{
+		return "error"
+	}
 }
 
 /**
