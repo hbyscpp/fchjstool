@@ -25,9 +25,9 @@
 	//console.log(r);
 	//1NsnkNPzi5iRirf8ycD2C76ctjWnYbpBDT
 	//1NsnkNPzi5iRirf8ycD2C76ctjWnYbpBDT
-    //var addrBch = addressConvert('bch','fch',"bitcoincash:qrhltg96p2alxunt97ude3atwdjvnmqtfyaww2z68x");
+    //var addrBch = addressConvert('bch',"1F3c4AdEUxwWEo64k15LyftN8n7eZkckjU");
 	// 	//0100000002ba7b802d10429e5b952ad384965df9ca5f923054a0219cfb2d7df88b8c615901000000006b483045022100d24d054dde15be1d09c1700fd783e8f0af22e8408634cb6a25c913f4d93729cf0220278b34ad40bc7422185d8f09a329b86e221452b3d6c7b910a32de8287088933c412102316a38f51bcefdb37138d574a3770d051487874d6b41475f061e9bdd59232082ffffffff4c5ee81e2e3e28e1387c3b8e9820ced98ee8411dc5b0caf2553ea99157329701020000006a47304402206a1a840a030735d92cc533f09184b56e0bbe2f3286459b3fff4ee3823d40bf2b02206c01cdf0770d293fad029d9770ef4d151e05904721fa21642f9f545f8d466e8c4121032746ae4811a6e302222b64e11b3f22b27f35bfee49b8fadb71c62e309bacf2ccffffffff0340420f00000000001976a9147e517ce48da51f81edbe97df591f8567e9c1ee9388ac40548900000000001976a914c714ea12b551d2d820712db4d6f2a4b61a2c2bee88acd8c22d00000000001976a91437b027f06ce41b757e66a8e9c5e98ae93ab86cae88ac00000000
-
+    //console.log(addrBch);
 	//var sig=createTranscationSig();
 	/**
 	var privatekeys=['KzpJU6T6dhBsgifeNE4VMZBbhVTmi2QiK3UtN8CtmFT7rnBQ4XAo','L5LZd6XB9ZrqrXHDzFBXpHd1mYsV7spXpVshVsPswtJKhTFGQdne'];
@@ -61,23 +61,27 @@
      //const sig = schnorr.sign(msg, key);
 	 //schnorr.verify(msg, sig, pub)
 **/
- 
-/**
-    var privatekeys=['KxbCqqRA9SoMZjL3XzTQcKgid6tc35syQntfe2XDnU7jW5sYAvWY'];
-	var txids=['b117cf3b8e601d71e0bfc9c57b3d7bc05454b309ffb5fde042bd1e5260e5c35d'];
-	var inputamounts=['0.5'];
-	var indexs=[0];
-	var outputaddres=['bitcoincash:qqggc4n5rewesrdgjkjp6t9a5xtyp27seqjgh9ydg9','bitcoincash:qps03d5a045lfaa4ffrd6xtru6nh2gygygkvyjvsz3'];
-	var outputamounts=['0.000001','0.003'];
-	var returnaddr='bitcoincash:qqggc4n5rewesrdgjkjp6t9a5xtyp27seqjgh9ydg9';
+//aGVsbG8sd29ybGQ=
+	var feip3=encodeFEIP003("cm",["足球","读书"],2);
+	var feip4=encodeFEIP004(4);
+	console.log(feip4);
+
+    var privatekeys=['KwLrLzvsh4GYAk6Zzjs5ThciutYCGuHYtXgqhnQKXYSvb8b5YhTW','KwLrLzvsh4GYAk6Zzjs5ThciutYCGuHYtXgqhnQKXYSvb8b5YhTW'];
+	var txids=['4a6bef758ae46c4610e5970e75d87effb8630eb3c8d2401008b78fc73f86d41e','11b0355015a1ca9d26bd82a26d7600bfbbb40afca2fea6e28d49b91da2a67bed'];
+	var inputamounts=['25','25'];
+	var indexs=[0,0];
+	var outputaddres=['F8TWjdrQ4vFjB772iWeyw4gQnjaKzy7QVb','F8TWjdrQ4vFjB772iWeyw4gQnjaKzy7QVb','FHDq2gN7RihW1opgR8jTkYYcb5kznTMaXg'];
+	var outputamounts=['0.003','0.003','0.11'];
+	var returnaddr='FHDq2gN7RihW1opgR8jTkYYcb5kznTMaXg';
 	var fee='0.000001';
-	sig=createBchTranscationSig(privatekeys,txids,inputamounts,indexs,outputaddres,outputamounts,returnaddr,fee,'hello,world');
+	sig=createFchTranscationSig(privatekeys,txids,inputamounts,indexs,[],[],"",fee,"5L2g5aW95Lit5Zu9",2);
 	console.log(sig);
-	**/
-	/**
+	
+    /**
 	var msg=signMessage('btc','cPBn5A4ikZvBTQ8D7NnvHZYCAxzDZ5Z2TSGW2LkyPiLxqYaJPBW4','1234');
+	msg='H1Kzi/EqireCg/kGnhhPgQx5IT5jeCgmcTyvv1v6woaVSLMelCiS+LWM+IHWwrGgYpHMh3rsegd7tXONaCFGQK4=';
 	console.log(msg);
-	var signmsg=messageVerify('btc',"n1ZCYg9YXtB5XCZazLxSmPDa8iwJRZHhGx",'1234',msg);
+	var signmsg=messageVerify('bch',"bitcoincash:qzdqlkhq4xklkqcw8lde9dwcs7kzmazasgaex56gqf",'a',msg);
 	console.log(signmsg);
 	**/
 	//var code=mnemonicWord('bch','的 去 次 收 深 官 负 袁 训 伤 鼓 楼',"m/0'/145'/1'/1/2");
