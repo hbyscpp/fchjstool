@@ -336,8 +336,8 @@ msg 文本或者base64编码的文本
 
 msgtype 1是文本 2是base64文本
 
- */
-function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg，msgtype) {
+ **/
+function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg,msgtype) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
 		if (outputaddresses.length != outputamounts.length)
@@ -424,8 +424,8 @@ msg 文本或者base64编码的文本
 
 msgtype 1是文本 2是base64文本
 
- */
-function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg，msgtype) {
+ **/
+function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg,msgtype) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
 		if (outputaddresses.length != outputamounts.length)
@@ -506,7 +506,7 @@ msg 文本或者base64编码的文本
 
 msgtype 1是文本 2是base64文本
 
- */
+ **/
 function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg,msgtype) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
