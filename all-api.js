@@ -1,5 +1,7 @@
 
-
+/**
+	字符串编程utf-8字节
+**/
 function stringToByte(str) {
 			var bytes = new Array();
 			var len, c;
@@ -330,10 +332,12 @@ returnaddr  找零地址
 
 txfee  交易费
 
+msg 文本或者base64编码的文本
 
+msgtype 1是文本 2是base64文本
 
  */
-function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg) {
+function createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg，msgtype) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
 		if (outputaddresses.length != outputamounts.length)
@@ -396,7 +400,32 @@ function computerSatoshis(amount)
 	
 	return totalinputamount.times(100000000).toNumber();
 }
-function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg) {
+/**
+
+生成交易签名
+
+inputprivatekeys 输入私钥列表
+
+txids  输入utxo的id列表
+
+inputamounts  输入数量
+
+indexs utxo的索引列表
+
+outputaddresses 输出地址列表
+
+outputamounts 输出数量
+
+returnaddr  找零地址
+
+txfee  交易费
+
+msg 文本或者base64编码的文本
+
+msgtype 1是文本 2是base64文本
+
+ */
+function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg，msgtype) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
 		if (outputaddresses.length != outputamounts.length)
@@ -453,7 +482,31 @@ function createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 	return trans.toString();
 
 }
+/**
 
+生成交易签名
+
+inputprivatekeys 输入私钥列表
+
+txids  输入utxo的id列表
+
+inputamounts  输入数量
+
+indexs utxo的索引列表
+
+outputaddresses 输出地址列表
+
+outputamounts 输出数量
+
+returnaddr  找零地址
+
+txfee  交易费
+
+msg 文本或者base64编码的文本
+
+msgtype 1是文本 2是base64文本
+
+ */
 function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr, txfee,msg,msgtype) {
 	if (inputprivatekeys.length != txids.length || inputprivatekeys.length != inputamounts.length || inputprivatekeys.length != indexs.length)
 		throw "input length not same"
