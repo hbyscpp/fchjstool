@@ -295,8 +295,31 @@ function generateAdress(coinType, secretKey) {
 function getPublickKeyFromWIF(coinType, wif) {
 	
 		var pk = BitcoreLibFreeCash.PrivateKey.fromWIF(wif);
-		var address = pk.toPublicKey().toString();
+		var address = pk.toPublicKey().toBuffer();
+		return BitcoreLibFreeCash.encoding.Base58Check.encode(address);
+	
+}
+
+function getPublickKeyAddress(coinType, base58pk) {
+	var pkbuf=BitcoreLibFreeCash.encoding.Base58Check.decode(base58pk);
+	if (coinType == 'btc') {
+
+		var pk = new BitcoreLib.PublicKey(pkbuf);
+		var address = pk.toAddress().toString();
 		return address;
+	}
+
+	if (coinType == 'bch') {
+		var pk = new BitcoreLibCash.PublicKey(pkbuf);
+		var address = pk.toAddress().toCashAddress();
+		return address
+	}
+
+	if (coinType == 'fch') {
+		var pk = new BitcoreLibFreeCash.PublicKey(pkbuf);
+		var address = pk.toAddress().toString();
+		return address;
+	}
 	
 }
 
@@ -364,7 +387,7 @@ function messageVerify(coinType,address,msg,sigstr)
 {
 	try{
 	var addr=addressConvert('btc',address);
-	return BitcoreMsg.Message(msg).verify(addr,sigstr)
+	return BitcoreMsg.Message(msg).verify(addr,sigstr);
 	}catch(error)
 	{
 		return "error"
@@ -622,6 +645,28 @@ function createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, 
 	return trans.toString();
 }
 /**
+	单位是s
+**/
+function calcMinTranscationFee(coinType,inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,msg,msgtype) {
+
+if(coinType=='bch')
+{
+	var sig=createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,"0.001",msg,msgtype);
+	return sig.length/2;
+}
+if(coinType=='btc')
+{
+	var sig=createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,"0.001",msg,msgtype);
+	return sig.length/2;
+}
+if(coinType=='fch')
+{
+	var sig=createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,"0.001",msg,msgtype);
+	return sig.length/2;
+}
+
+}
+/**
 words 空格分隔  比如:你 好 世 界	
 path  btc m/44/0/0/1/2'  m/44/0/145/1/2'
 **/
@@ -638,7 +683,8 @@ function  mnemonicWord(cointype,words,path)
 function encryptData(data,publicKey)
 {
 	var rndPK=new BitcoreLib.PrivateKey();
-	var publickey=new BitcoreLib.PublicKey(publicKey);
+	var pkbuf=BitcoreLibFreeCash.encoding.Base58Check.decode(publicKey);
+	var publickey=new BitcoreLib.PublicKey(pkbuf);
 	var ecies=new BitcoreEcies().privateKey(rndPK).publicKey(publickey);
 	var result=ecies.encrypt(data);
 	//return result;
@@ -667,6 +713,11 @@ function encodeFEIP003(username,tags,op)
 	    var tag=tags[i];
 	    if(typeof(tag) == 'string' && tag!='' && tag.indexOf("#")==-1)
 		{
+	        var tagstr=stringToByte(tag);
+			if(tagstr.length>16)
+		    {
+			  return "1";
+		    }
 			tagsstr=tagsstr+"#"+tag;
 		}else
 		{
