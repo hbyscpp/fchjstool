@@ -651,17 +651,17 @@ function calcMinTranscationFee(coinType,inputprivatekeys, txids, inputamounts, i
 
 if(coinType=='bch')
 {
-	var sig=createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,"0.001",msg,msgtype);
+	var sig=createBchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,"0.00000001",msg,msgtype);
 	return sig.length/2;
 }
 if(coinType=='btc')
 {
-	var sig=createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,"0.001",msg,msgtype);
+	var sig=createBtcTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,"0.00000001",msg,msgtype);
 	return sig.length/2;
 }
 if(coinType=='fch')
 {
-	var sig=createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,"0.001",msg,msgtype);
+	var sig=createFchTranscationSig(inputprivatekeys, txids, inputamounts, indexs, outputaddresses, outputamounts, returnaddr,"0.00000001",msg,msgtype);
 	return sig.length/2;
 }
 
