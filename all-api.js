@@ -733,7 +733,7 @@ function decryptData(data,pkWIF)
 
 //protocol FEIP003
 
-function encodeFEIP003(username,tags,op)
+function encodeFEIP003(username,tags,op,recmdname)
 {
 	
 	var tagslen = tags.length;
@@ -755,7 +755,7 @@ function encodeFEIP003(username,tags,op)
 		}
 	}
 	//create or update
-	if(op==1)
+	if(op==1 || op==3)
 	{
 	  if(typeof(username) == 'string' && username!='')
 	  {
@@ -763,6 +763,18 @@ function encodeFEIP003(username,tags,op)
        {
 		var returnmsg= "FEIP|3|1|"+username+"|"+tagsstr;  
 		//check长度
+		if(recmdname!="" && recmdname.indexOf("|")>-1)
+		{
+			return "error";
+		}
+		if(recmdname!="")
+		{
+			returnmsg=returnmsg+"|"+recmdname;
+		}
+		else
+		{
+			returnmsg=returnmsg+"|";
+		}
 		var bytesstr=stringToByte(returnmsg);
 		if(bytesstr.length>210)
 		{
@@ -785,7 +797,7 @@ function encodeFEIP003(username,tags,op)
 	}
 	if(op==2)
 	{
-		return "FEIP|3|1||"
+		return "FEIP|3|1|||"
 	}
 }
 
