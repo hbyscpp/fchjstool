@@ -746,12 +746,12 @@ function encodeFEIP003(username,tags,op,recmdname)
 	        var tagstr=stringToByte(tag);
 			if(tagstr.length>16)
 		    {
-			  return "1";
+			  throw "input is too long";
 		    }
 			tagsstr=tagsstr+"#"+tag;
 		}else
 		{
-			return "error";
+			throw "input contain illegal character | or #";
 		}
 	}
 	//create or update
@@ -759,16 +759,26 @@ function encodeFEIP003(username,tags,op,recmdname)
 	{
 	  if(typeof(username) == 'string' && username!='')
 	  {
+       var usernamebytesstr=stringToByte(username);
+	   if(usernamebytesstr.length>32)
+	   {
+		   throw "input is too long";
+	   }
        if(username.indexOf("|")==-1)
        {
 		var returnmsg= "FEIP|3|1|"+username+"|"+tagsstr;  
 		//check长度
 		if(recmdname!="" && recmdname.indexOf("|")>-1)
 		{
-			return "error";
+			throw "input contain illegal character | or #";
 		}
 		if(recmdname!="")
 		{
+	    var rusernamebytesstr=stringToByte(recmdname);
+	     if(rusernamebytesstr.length>48)
+	     {
+		   throw "input is too long";
+	      }
 			returnmsg=returnmsg+"|"+recmdname;
 		}
 		else
@@ -778,7 +788,7 @@ function encodeFEIP003(username,tags,op,recmdname)
 		var bytesstr=stringToByte(returnmsg);
 		if(bytesstr.length>210)
 		{
-			return "1";
+			 throw "input is too long";
 			
 		}else{
 		
@@ -788,11 +798,11 @@ function encodeFEIP003(username,tags,op,recmdname)
 	   }
 	   else
 	   {
-		   return "error";
+		  throw "input is too long";
 	   }
    
 	  }else{
-		  return "error";
+		 throw "input is too long";
 	}
 	}
 	if(op==2)
