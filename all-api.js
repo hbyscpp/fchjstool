@@ -819,12 +819,18 @@ function encodeFEIP004(op,stime,etime)
 	var stimestr=''
 	if (stime !== null && stime !== undefined && stime !== '') 
 	{
-		stimestr=stime.formatDate("yyyy-MM-dd hh:mm:ss")
+        var offset_time=stime.getTimezoneOffset();
+		var curtime=stime.getTime()
+		var nsdate=new Date(curtime+offset_time*60*1000);
+		stimestr=nsdate.formatDate("yyyyMMddhhmmss")
 	}
 	var etimestr=''
 	if (etime !== null && etime !== undefined && etime !== '') 
 	{
-		etimestr=etime.formatDate("yyyy-MM-dd hh:mm:ss")
+        var offset_time=etime.getTimezoneOffset();
+		var curtime=etime.getTime()
+		var nsdate=new Date(curtime+offset_time*60*1000);
+		etimestr=nsdate.formatDate("yyyyMMddhhmmss")
 	}
 	
 	if(op==1)
