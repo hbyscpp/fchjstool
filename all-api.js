@@ -424,6 +424,29 @@ function messageVerify(coinType,address,msg,sigstr)
 	}
 }
 
+function signFullMessage(coinType,privateKey,msg)
+{
+	var pk=BitcoreMsg.PrivateKey.fromString(privateKey);
+	
+	var address = pk.toAddress().toString();
+	
+	var newAddress=addressConvert(coinType,address);
+	
+	var signmsg=signMessage(coinType,privateKey,msg);
+	
+	return msg+"----"+newAddress+"----"+signmsg;
+}
+
+function verifyFullMessage(coinType,fullmsg)
+{
+	var datas=fullmsg.split("----");
+	
+    if(datas==null || datas.length!=3)
+		throw "invalid data";
+	
+	return messageVerify(coinType,datas[1],datas[0],datas[2]);
+}
+
 /**
 
 生成交易签名
