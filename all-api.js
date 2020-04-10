@@ -859,7 +859,7 @@ function encodeFEIP004V2(op,stime,etime,range)
 	}
 	var rangelen=range.length;
 	var rangestr='';
-	for(int i=0;i<rangelen;++i)
+	for(var i=0;i<rangelen;++i)
 	{
 		if(range[i]==1)
 		{
@@ -919,7 +919,7 @@ function encodeFEIP006V2(op,stime,etime,range)
 	}
 	var rangelen=range.length;
 	var rangestr='';
-	for(int i=0;i<rangelen;++i)
+	for(var i=0;i<rangelen;++i)
 	{
 		if(range[i]==1)
 		{
