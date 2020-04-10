@@ -835,9 +835,11 @@ function encodeFEIP003(username,tags,op,recmdname)
 }
 
 //protocol FEIP004
+//op 1 等同  2 联合,3主从
+//range 是个列表,1,链上留言 2 属性声明 3 声明认证 4 贡献填报
 //stime date类型
 //etime date类型
-function encodeFEIP004(op,stime,etime)
+function encodeFEIP004V2(op,stime,etime,range)
 {   
 	var stimestr=''
 	if (stime !== null && stime !== undefined && stime !== '') 
@@ -855,25 +857,96 @@ function encodeFEIP004(op,stime,etime)
 		var nsdate=new Date(curtime+offset_time*60*1000);
 		etimestr=nsdate.formatDate("yyyyMMddhhmmss")
 	}
-	
+	var rangelen=range.length;
+	var rangestr='';
+	for(int i=0;i<rangelen;++i)
+	{
+		if(range[i]==1)
+		{
+			rangestr=rangestr+'#FEIP7V2';
+		}
+		if(range[i]==2)
+		{
+			rangestr=rangestr+'#FEIP8V2';
+		}
+		if(range[i]==3)
+		{
+			rangestr=rangestr+'#FEIP9V2';
+		}
+		if(range[i]==4)
+		{
+			rangestr=rangestr+'#FOCP1V2';
+		}
+		
+		
+	}
 	if(op==1)
 	{
-		return "FEIP|4|1|equal|"+stimestr+"|"+etimestr;
+		return "FEIP|4|2|equal|"+stimestr+"|"+etimestr+"|"+rangestr;
 	}
 	if(op==2)
 	{
-		return "FEIP|4|1|replace|"+stimestr+"|"+etimestr;
+		return "FEIP|4|2|combine|"+stimestr+"|"+etimestr+"|"+rangestr;
 	}
 	if(op==3)
 	{
-		return "FEIP|4|1|backup|"+stimestr+"|"+etimestr;
+		return "FEIP|4|2|master|"+stimestr+"|"+etimestr+"|"+rangestr;
 	}
-	if(op==4)
+}
+
+//protocol FEIP004
+//op 1 授权  2 解除授权
+//range 是个列表,1,链上留言 2 属性声明 3 声明认证 4 贡献填报
+//stime date类型
+//etime date类型
+function encodeFEIP006V2(op,stime,etime,range)
+{   
+	var stimestr=''
+	if (stime !== null && stime !== undefined && stime !== '') 
 	{
-		return "FEIP|4|1|combine|"+stimestr+"|"+etimestr;
+        var offset_time=stime.getTimezoneOffset();
+		var curtime=stime.getTime()
+		var nsdate=new Date(curtime+offset_time*60*1000);
+		stimestr=nsdate.formatDate("yyyyMMddhhmmss")
 	}
-	if(op==5)
+	var etimestr=''
+	if (etime !== null && etime !== undefined && etime !== '') 
 	{
-		return "FEIP|4|1|master|"+stimestr+"|"+etimestr;
+        var offset_time=etime.getTimezoneOffset();
+		var curtime=etime.getTime()
+		var nsdate=new Date(curtime+offset_time*60*1000);
+		etimestr=nsdate.formatDate("yyyyMMddhhmmss")
 	}
+	var rangelen=range.length;
+	var rangestr='';
+	for(int i=0;i<rangelen;++i)
+	{
+		if(range[i]==1)
+		{
+			rangestr=rangestr+'#FEIP7V2';
+		}
+		if(range[i]==2)
+		{
+			rangestr=rangestr+'#FEIP8V2';
+		}
+		if(range[i]==3)
+		{
+			rangestr=rangestr+'#FEIP9V2';
+		}
+		if(range[i]==4)
+		{
+			rangestr=rangestr+'#FOCP1V2';
+		}
+		
+		
+	}
+	if(op==1)
+	{
+		return "FEIP|6|2|authorition|"+stimestr+"|"+etimestr+"|"+rangestr;
+	}
+	if(op==2)
+	{
+		return "FEIP|6|2|deprivation|"+stimestr+"|"+etimestr+"|"+rangestr;
+	}
+	
 }

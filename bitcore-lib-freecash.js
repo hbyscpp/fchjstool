@@ -54364,7 +54364,21 @@ function verify(transaction, signature, publicKey, inputIndex, subscript, satosh
   //verify schnorr sig
   var hashbuf = sighash(transaction, signature.nhashtype, inputIndex, subscript, satoshisBN, flags);
   //
-  var publickeyBuffer=BipSchnorr.base.BF.from(publicKey.toString(),'hex');
+  var xstr="";
+  if(publicKey.compressed==false)
+  {
+	  xstr=publicKey.toJSON().x;
+	  if(publicKey.point.getY().isEven())
+	  {
+		  xstr='02'+xstr;
+	  }else
+	  {
+		  xstr='03'+xstr;
+	  }
+  }else{
+   xstr=publicKey.toString();
+  }
+  var publickeyBuffer=BipSchnorr.base.BF.from(xstr,'hex');
   try
   {
   BipSchnorr.verify(publickeyBuffer,hashbuf,signature.toBuffer());
