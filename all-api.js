@@ -950,3 +950,25 @@ function encodeFEIP006V2(op,stime,etime,range)
 	}
 	
 }
+
+//protocol FEIP11V1
+//op 1 申请参与  2 销毁币天 3 发放币天
+
+
+function encodeFEIP11V2(op)
+{   
+	
+	if(op==1)
+	{
+		return "FEIP|11|1|apply";
+	}
+	if(op==2)
+	{
+		return "FEIP|11|1|destroy";
+	}
+	if(op==3)
+	{
+		return "FEIP|11|1|award";
+	}
+	
+}
