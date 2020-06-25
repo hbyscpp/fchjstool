@@ -923,21 +923,24 @@ function encodeFEIP006V2(op,stime,etime,range)
 	{
 		if(range[i]==1)
 		{
-			rangestr=rangestr+'#FEIP7V2';
+			rangestr=rangestr+'#FEIP7';
 		}
 		if(range[i]==2)
 		{
-			rangestr=rangestr+'#FEIP8V2';
+			rangestr=rangestr+'#FEIP8';
 		}
 		if(range[i]==3)
 		{
-			rangestr=rangestr+'#FEIP9V2';
+			rangestr=rangestr+'#FEIP9';
 		}
 		if(range[i]==4)
 		{
-			rangestr=rangestr+'#FOCP1V2';
+			rangestr=rangestr+'#FOCP1';
 		}
-		
+		if(range[i]==5)
+		{
+			rangestr=rangestr+'#FOCP3';
+		}
 		
 	}
 	if(op==1)
@@ -947,6 +950,10 @@ function encodeFEIP006V2(op,stime,etime,range)
 	if(op==2)
 	{
 		return "FEIP|6|2|deprivation|"+stimestr+"|"+etimestr+"|"+rangestr;
+	}
+	if(op==3)
+	{
+		return "FEIP|6|2|irrevocable_authorition|"+stimestr+"|"+etimestr+"|"+rangestr;
 	}
 	
 }
