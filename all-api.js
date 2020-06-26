@@ -953,7 +953,7 @@ function encodeFEIP006V2(op,stime,etime,range)
 	}
 	if(op==3)
 	{
-		return "FEIP|6|2|irrevocable_authorition|"+stimestr+"|"+etimestr+"|"+rangestr;
+		return "FEIP|6|2|irrevocable_authorition|||";
 	}
 	
 }
