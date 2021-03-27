@@ -326,7 +326,29 @@ function getPublickKeyFromWIF(coinType, wif) {
 	
 		var pk = BitcoreLibFreeCash.PrivateKey.fromWIF(wif);
 		var address = pk.toPublicKey().toBuffer();
-		return BitcoreLibFreeCash.encoding.Base58Check.encode(address);
+		return address.toString("hex");
+	
+}
+function getPublicKeyFromHex(coinType, hexStr) {
+	var pkbuf=BitcoreLibFreeCash.encoding.Base58Check.decode(base58pk);
+	if (coinType == 'btc') {
+
+		var pk = new BitcoreLib.PublicKey.fromString(hexStr,'hex');
+		var address = pk.toAddress().toString();
+		return address;
+	}
+
+	if (coinType == 'bch') {
+		var pk = new BitcoreLibCash.PublicKey(pkbuf);
+		var address = pk.toAddress().toCashAddress();
+		return address
+	}
+
+	if (coinType == 'fch') {
+		var pk = new BitcoreLibFreeCash.PublicKey(pkbuf);
+		var address = pk.toAddress().toString();
+		return address;
+	}
 	
 }
 
@@ -352,6 +374,8 @@ function getPublickKeyAddress(coinType, base58pk) {
 	}
 	
 }
+
+
 
 function importAdressFromWIF(coinType, wif) {
 	if (coinType == 'btc') {
@@ -738,6 +762,16 @@ function encryptData(data,publicKey)
 	var rndPK=new BitcoreLib.PrivateKey();
 	var pkbuf=BitcoreLibFreeCash.encoding.Base58Check.decode(publicKey);
 	var publickey=new BitcoreLib.PublicKey(pkbuf);
+	var ecies=new BitcoreEcies().privateKey(rndPK).publicKey(publickey);
+	var result=ecies.encrypt(data);
+	//return result;
+	return base64ArrayBuffer(result);
+}
+
+function encryptDataByPubkeyHex(data,publicKey)
+{
+	var rndPK=BitcoreLib.PrivateKey.fromWIF("L1WkwqiJgkPoYdjrs7tcikRj5hjwFebiTUChvxwubuSohpAaDzjP");
+	var publickey=new BitcoreLib.PublicKey.fromString(publicKey,'hex');
 	var ecies=new BitcoreEcies().privateKey(rndPK).publicKey(publickey);
 	var result=ecies.encrypt(data);
 	//return result;
