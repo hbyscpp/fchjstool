@@ -770,7 +770,7 @@ function encryptData(data,publicKey)
 
 function encryptDataByPubkeyHex(data,publicKey)
 {
-	var rndPK=BitcoreLib.PrivateKey.fromWIF("L1WkwqiJgkPoYdjrs7tcikRj5hjwFebiTUChvxwubuSohpAaDzjP");
+	var rndPK=new BitcoreLib.PrivateKey();;
 	var publickey=new BitcoreLib.PublicKey.fromString(publicKey,'hex');
 	var ecies=new BitcoreEcies().privateKey(rndPK).publicKey(publickey);
 	var result=ecies.encrypt(data);
