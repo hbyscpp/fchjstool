@@ -23,17 +23,18 @@
 
     <script type="text/javascript">
 	//console.log(getPublickKeyFromWIF('fch','5J3mBbAH58CpQ3Y5RNJpUKPE62SQ5tfcvU2JpbnkeyhfsYB1Jcn'));
-	var privateKey=BitcoreLibFreeCash.PrivateKey.fromWIF("L1WkwqiJgkPoYdjrs7tcikRj5hjwFebiTUChvxwubuSohpAaDzjP")
-	console.log(getPublickKeyFromWIF('fch','L1WkwqiJgkPoYdjrs7tcikRj5hjwFebiTUChvxwubuSohpAaDzjP'));                                             
+	var privateKey=BitcoreLibFreeCash.PrivateKey.fromWIF("L5NqSXq1j3jazSoasrM4CqZuEwxwD6iM2aFSiN5uqEBiGoJL9HtW")
+	console.log(getPublickKeyFromWIF('fch','L5FUYiDbpWdZi2qQSZvwLWbB67F1ENwEyiwP3RGsd8f6Lr7LFqwP'));                                             
 	console.log(privateKey.toAddress().toString());
 	console.log(signFullMessage('fch','L1WkwqiJgkPoYdjrs7tcikRj5hjwFebiTUChvxwubuSohpAaDzjP','helloworld'));
 	console.log(verifyFullMessage('fch','helloworld----F7i2w8LL5Y1nZXJgneJdwCxdYMPH67kiUp----H9PfTLhMJwBFF4oRMbs4sGrRlTb6ikHyWdrRDRVf9pBTPg8+oJkIYshGT8gRMD84mFe9eOzC1XJwoDXqZJhTAw0='));
 	
-	var data1=encryptDataByPubkeyHex("1234","023e0098dbd6126b140a160073d3ab1f94bff109f144d211c4054759e2fe2e7f86");
+	var d="eyJ0eXBlIjoiRkVJUCIsInNuIjoxNywidmVyIjozLCJuYW1lIjoiRGlnaXRFbnZlbG9wZSIsImhhc2giOiI3ODNmZjFhMjQ4ZWU0ODBiMTg2MTEyOGQwYzQ1ZTc5ZDhhMjk5Njk2NGRmODQ1NDE4ZjQyN2NkNzgxNjM5YTdjIiwiZGF0YSI6eyJvcCI6ImFkZCIsImFsZyI6IkVDQzI1NmsxLUFFUzI1NkNCQyIsIm1zZyI6IjRhNmJlZjc1OGFlNDZjNDYxMGU1OTcwZTc1ZDg3ZWZmYjg2MzBlYjNjOGQyNDAxMDA4Yjc4ZmM3M2Y4NmQ0MWUifX0=";
+    var data1=encryptBase64DataByPubkeyHex(d,"03efe9a127384c4285739430ddc2add6829ec51fbc889c41870ad5a9e1c58080b9");
 	console.log(data1);
 	
-   data1=decryptData('AhEBoXmf+HxMTQKkDenuV13IpkTXYdTRPc+HxcUC20pX2RWsN6Ml5vLV1TfN22KZ8uBu9YV/jCUHyoYR0ZWeXNV+0mkPaxmXDhgdXxJFWYbRa264XeZhMuviA9LOWvgJUw==','L5FUYiDbpWdZi2qQSZvwLWbB67F1ENwEyiwP3RGsd8f6Lr7LFqwP');
-   console.log(data1);
+    data1=decryptData(data1,'L5FUYiDbpWdZi2qQSZvwLWbB67F1ENwEyiwP3RGsd8f6Lr7LFqwP');
+    console.log(data1);
 	//console.log(decryptData(data1,'5J3mBbAH58CpQ3Y5RNJpUKPE62SQ5tfcvU2JpbnkeyhfsYB1Jcn'));
 	/**
 	var pk1 = new BitcoreLib.PrivateKey('5J3mBbAH58CpQ3Y5RNJpUKPE62SQ5tfcvU2JpbnkeyhfsYB1Jcn');

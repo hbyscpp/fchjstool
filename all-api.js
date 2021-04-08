@@ -778,6 +778,16 @@ function encryptDataByPubkeyHex(data,publicKey)
 	return base64ArrayBuffer(result);
 }
 
+function encryptBase64DataByPubkeyHex(data,publicKey)
+{
+	var rndPK=new BitcoreLib.PrivateKey();;
+	var publickey=new BitcoreLib.PublicKey.fromString(publicKey,'hex');
+	var ecies=new BitcoreEcies().privateKey(rndPK).publicKey(publickey);
+	var result=ecies.encrypt(new buffer.Buffer(toByteArray(data)));
+	//return result;
+	return base64ArrayBuffer(result);
+}
+
 function decryptData(data,pkWIF)
 {
 	var bdata=toByteArray(data);
